@@ -2,14 +2,6 @@
 
 The official repository for the Compendium website, powered by Sveltekit.
 
-## Requirements
-
-To run this app, you will need to connect it up with a database. I use a PostgreSQL database, but you can use any database supported by Prisma. The connection string should be stored in a `.env` file in the root of the project. The `.env` file should look like this (replace with your own database connection string):
-
-```env
-DATABASE_URL=postgres://user:password@host:port/database
-```
-
 ## Cloning this project
 
 To set this project up locally, clone the repository and install the dependencies with `npm install` (or `pnpm install` or `yarn`), then start a development server:
