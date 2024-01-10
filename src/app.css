@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Global */
+  --font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --serif-font-family: "Fraunces", serif;
+  --pure-white: #fff;
+  --heading-color: #1e1e1e;
+  --text-color: #020202;
+  --background-without-opacity: #F4E5D4;
+  --logo-color: #21401F;
+  --column-width: 42rem;
+  --column-margin-top: 4rem;
+
+  --border-radius-sm: 6px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 18px;
+
+  --color-primary: #C57142;
+  --color-secondary: #21401F;
+  --color-background-error: #f20000;
+  --color-text-error: #fff;
+  --color-background-success: #00a572;
+  --color-text-success: #fff;
+
+  --grid-spacing: 8px;
+
+  --button-color-background-primary: var(--color-primary);
+  --button-color-text-primary: #fff;
+  --button-color-background-primary-hover: #fff;
+  --button-color-text-primary-hover: var(--color-primary);
+
+  --button-color-background-secondary: var(--color-secondary);
+  --button-color-text-secondary: #fff;
+  --button-color-background-secondary-hover: #fff;
+  --button-color-text-secondary-hover: var(--color-secondary);
+
+  --input-color-background: #f0f0f0;
+  --input-color-text: #000;
+}
+
+@layer base {
+  html {
+    @apply leading-6;
+  }
+
+  html,
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply text-base;
+  }
+
+  body{
+    @apply font-sans;
+  }
+
+  h1 {
+    @apply max-w-3xl text-7xl mb-12;
+  }
+
+  h1 a {
+    @apply text-black;
+  }
+
+  h2 {
+    @apply text-3xl font-normal mb-0;
+  }
+
+  h3 {
+    @apply text-2xl font-normal mb-2;
+  }
+
+  h4 {
+    @apply text-base font-normal mb-8 text-gray-600;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display text-secondary;
+    letter-spacing: -0.05em;
+  }
+
+  a {
+    @apply text-secondary text-secondary underline hover:no-underline;
+  }
+
+  body {
+    background-color: var(--background-without-opacity);
+    font-family: var(--font-family);
+  }
+
+  .content{
+    @apply max-w-[calc(100%-4rem)] mx-auto;
+  }
+
+  section {
+    margin-right: auto;
+  }
+
+  .button,
+  button,
+  input[type="submit"]{
+    @apply px-12 py-6 bg-primary rounded-full text-sm tracking-widest uppercase no-underline text-nowrap;
+    color: var(--button-color-text-primary);
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="email"]{
+    @apply px-4 py-2 bg-[#EAE3DB] rounded-md py-5 px-4;
+  }
+
+  a.cta {
+    @apply capitalize underline underline-offset-8 decoration-2 decoration-secondary hover:text-primary hover:decoration-primary;
+  }
+
+  .subtitle {
+    @apply mb-6 text-2xl font-medium;
+  }
+
+  .content .prose {
+    @apply max-w-full mb-12 text-lg text-stone-800 leading-loose;
+  }
+
+  .large {
+    @apply px-12 py-4 w-full font-semibold text-center;
+  }
+
+  .small {
+    @apply px-3 py-1;
+  }
+
+  .hidden{
+    transition: opacity 0.4s;
+    opacity: 0.4;
+  }
+
+  dl{
+    @apply text-sm grid grid-cols-5;
+  }
+
+  dt,dd{
+    @apply py-1 overflow-ellipsis whitespace-nowrap overflow-x-hidden;
+  }
+
+  dt{
+    @apply font-bold col-span-2 pr-2;
+  }
+
+  dd{
+    @apply col-span-3;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  position: relative;
+  transform: translateY(10px);
+  transition: opacity 0.4s, transform 0.4s;
+  transition-delay: calc(var(--stagger-delay, 100ms) * var(--index, 0));
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
