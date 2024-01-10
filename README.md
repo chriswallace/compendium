@@ -1,6 +1,6 @@
-# Wallace Museum
+# Compendium
 
-The official repository for the Wallace Museum website, powered by Sveltekit.
+The official repository for the Compendium website, powered by Sveltekit.
 
 ## Requirements
 
