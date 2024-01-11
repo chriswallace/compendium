@@ -58,7 +58,7 @@
   }
 
   h1 {
-    @apply max-w-3xl text-7xl mb-12;
+    @apply max-w-3xl text-6xl md:text-7xl mb-12;
   }
 
   h1 a {
