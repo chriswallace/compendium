@@ -3,6 +3,10 @@
   import FeaturedTheme from "$lib/components/FeaturedTheme.svelte";
 </script>
 
+<svelte:head>
+  <title>Compendium: a standalone web app for your art gallery</title>
+</svelte:head>
+
 <div class="hero">
   <h1>Show off your digital art collection <i>in style</i>.</h1>
   <a href="#" class="button">Get Started</a>
