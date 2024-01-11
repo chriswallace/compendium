@@ -44,17 +44,17 @@
           type="text"
           id="awf_field-116728999"
           name="name"
-          tabindex="500"
+          tabindex="703"
           placeholder="Name"
         />
         <input
           type="email"
           name="email"
           id="awf_field-116729000"
-          tabindex="501"
+          tabindex="704"
           placeholder="Email Address"
         />
-        <input type="submit" tabindex="502" value="Subscribe" />
+        <input type="submit" tabindex="705" value="Subscribe" />
       </form>
     </div>
     <div class="copyright">
