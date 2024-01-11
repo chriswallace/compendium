@@ -137,11 +137,6 @@
     @apply px-3 py-1;
   }
 
-  .hidden{
-    transition: opacity 0.4s;
-    opacity: 0.4;
-  }
-
   dl{
     @apply text-sm grid grid-cols-5;
   }

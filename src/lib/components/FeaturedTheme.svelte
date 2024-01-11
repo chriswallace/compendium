@@ -57,6 +57,7 @@
 
   h2 {
     @apply lg:col-span-3 text-3xl font-light mb-8 font-sans;
+    letter-spacing: 0;
   }
 
   .actions {
