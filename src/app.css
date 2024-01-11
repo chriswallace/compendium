@@ -58,7 +58,7 @@
   }
 
   h1 {
-    @apply max-w-3xl text-6xl md:text-7xl mb-12;
+    @apply max-w-3xl text-4xl md:text-7xl mb-12;
   }
 
   h1 a {
@@ -66,11 +66,11 @@
   }
 
   h2 {
-    @apply text-3xl font-normal mb-0;
+    @apply sm:text-2xl md:text-3xl font-normal mb-0;
   }
 
   h3 {
-    @apply text-2xl font-normal mb-2;
+    @apply sm:text-xl md:text-2xl font-normal mb-2;
   }
 
   h4 {
@@ -107,7 +107,7 @@
   .button,
   button,
   input[type="submit"]{
-    @apply px-12 py-6 bg-primary rounded-full text-sm tracking-widest uppercase no-underline text-nowrap;
+    @apply px-12 py-6 text-center bg-primary rounded-full text-sm tracking-widest uppercase no-underline text-nowrap leading-tight;
     color: var(--button-color-text-primary);
   }
 

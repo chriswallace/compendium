@@ -35,7 +35,7 @@
   }
 
   .links a {
-    @apply block text-secondary leading-loose underline-offset-4 decoration-2 decoration-primary mb-1 text-xl font-semibold text-primary;
+    @apply block text-secondary leading-loose underline-offset-4 decoration-2 decoration-primary mb-1 text-xl font-normal text-primary;
   }
 
   .newsletter {

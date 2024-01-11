@@ -1,7 +1,7 @@
 <div class="mailing-list">
   <div class="container">
     <div class="subtitle-group">
-      <div class="subtitle">Subscribe to our mailing list.</div>
+      <div class="subtitle">Stay updated. Subscribe to our mailing list.</div>
       <p>Get notified when new themes and products are released.</p>
     </div>
     <form>
@@ -38,7 +38,7 @@
   }
 
   input[type="email"] {
-    @apply col-span-2 text-lg;
+    @apply md:col-span-2 text-lg;
 
     &::placeholder {
       @apply text-[#908375];
@@ -47,6 +47,6 @@
 
   input[type="email"],
   button {
-    @apply rounded-md p-4 px-8 h-16;
+    @apply col-span-6 md:col-span-4 rounded-md p-4 px-8 h-16;
   }
 </style>
