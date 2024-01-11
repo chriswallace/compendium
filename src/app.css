@@ -29,8 +29,8 @@
 
   --button-color-background-primary: var(--color-primary);
   --button-color-text-primary: #fff;
-  --button-color-background-primary-hover: #fff;
-  --button-color-text-primary-hover: var(--color-primary);
+  --button-color-background-primary-hover: #B16338;
+  --button-color-text-primary-hover: #fff;
 
   --button-color-background-secondary: var(--color-secondary);
   --button-color-text-secondary: #fff;
@@ -107,14 +107,14 @@
   .button,
   button,
   input[type="submit"]{
-    @apply px-12 py-6 text-center bg-primary rounded-full text-sm tracking-widest uppercase no-underline text-nowrap leading-tight;
+    @apply px-12 py-6 text-center bg-primary cursor-pointer rounded-full text-sm tracking-widest uppercase no-underline text-nowrap leading-tight hover:bg-gradient-to-b hover:from-primary hover:to-[#B16338] hover:text-[var(--button-color-text-primary-hover)] hover:shadow-lg;
     color: var(--button-color-text-primary);
   }
 
   input[type="text"],
   input[type="number"],
   input[type="email"]{
-    @apply px-4 py-2 bg-[#EAE3DB] rounded-md py-5 px-4;
+    @apply px-4 py-2 bg-[#EAE3DB] rounded-md py-5 px-4 focus:outline-2 outline-primary;
   }
 
   a.cta {

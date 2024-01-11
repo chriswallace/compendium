@@ -37,7 +37,7 @@
 
 <style lang="scss">
   header {
-    @apply pt-10 md:pt-8 md:pb-10 fixed left-0 top-0 right-0 bg-[var(--background-without-opacity)];
+    @apply pt-8 md:pt-6 md:pb-8 fixed left-0 top-0 right-0 bg-[var(--background-without-opacity)];
   }
 
   .mobile-menu {
@@ -57,7 +57,7 @@
   }
 
   a {
-    @apply text-xl md:text-lg text-center my-3 inline-block text-secondary no-underline hover:underline underline-offset-8 decoration-2 decoration-secondary hover:text-primary hover:decoration-primary font-medium uppercase;
+    @apply text-lg md:text-base text-center my-3 inline-block text-secondary no-underline hover:underline underline-offset-8 decoration-2 decoration-secondary hover:text-primary hover:decoration-primary font-medium uppercase;
   }
 
   .cta-container {
@@ -82,7 +82,7 @@
   }
 
   .logo {
-    @apply font-display text-[28px] md:text-[34px] lowercase tracking-tighter my-0 md:mt-2;
+    @apply font-display text-[26px] md:text-[30px] lowercase tracking-tighter my-0 md:mt-2;
 
     .mobile-menu & {
       @apply block md:hidden my-16;

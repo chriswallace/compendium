@@ -4,9 +4,52 @@
       <div class="subtitle">Stay updated. Subscribe to our mailing list.</div>
       <p>Get notified when new themes and products are released.</p>
     </div>
-    <form>
-      <input type="email" placeholder="Email Address" />
-      <button>Subscribe</button>
+    <form
+      method="post"
+      class="af-form-wrapper"
+      accept-charset="UTF-8"
+      action="https://www.aweber.com/scripts/addlead.pl"
+    >
+      <div class="hidden">
+        <input type="hidden" name="meta_web_form_id" value="151318046" />
+        <input type="hidden" name="meta_split_id" value="" />
+        <input type="hidden" name="listname" value="awlist6701372" />
+        <input
+          type="hidden"
+          name="redirect"
+          value="https://cpdm.app/success"
+          id="redirect_77675920773651233b7e23034e65e93f"
+        />
+        <input
+          type="hidden"
+          name="meta_redirect_onlist"
+          value="https://cpdm.app/already-subscribed"
+        />
+        <input
+          type="hidden"
+          name="meta_adtracking"
+          value="Website_Subscription_Box"
+        />
+        <input type="hidden" name="meta_message" value="1" />
+        <input type="hidden" name="meta_required" value="name,email" />
+
+        <input type="hidden" name="meta_tooltip" value="" />
+      </div>
+      <input
+        type="text"
+        id="awf_field-116728999"
+        name="name"
+        tabindex="500"
+        placeholder="Name"
+      />
+      <input
+        type="email"
+        name="email"
+        id="awf_field-116729000"
+        tabindex="501"
+        placeholder="Email Address"
+      />
+      <input type="submit" tabindex="502" value="Subscribe" />
     </form>
   </div>
 </div>
@@ -17,7 +60,7 @@
   }
 
   .container {
-    @apply grid grid-cols-6 lg:grid-cols-5 mx-auto items-center justify-center max-w-[84%] w-[calc(100%-2rem)];
+    @apply grid grid-cols-6 lg:grid-cols-5 gap-2 md:gap-6 mx-auto items-center justify-center max-w-[84%] w-[calc(100%-2rem)];
   }
 
   .subtitle-group {
@@ -25,7 +68,7 @@
   }
 
   .subtitle {
-    @apply font-display text-3xl mb-2 text-secondary;
+    @apply font-display text-3xl text-secondary;
     letter-spacing: -0.02em;
   }
 
@@ -34,19 +77,25 @@
   }
 
   form {
-    @apply col-span-6 lg:col-span-2 text-right grid grid-cols-3 gap-3 w-full;
+    @apply col-span-6 lg:col-span-2 text-right grid grid-cols-1 sm:grid-cols-4 gap-3 w-full;
   }
 
+  input[type="text"],
   input[type="email"] {
-    @apply md:col-span-2 text-lg;
+    @apply sm:col-span-2 text-lg;
 
     &::placeholder {
       @apply text-[#908375];
     }
   }
 
+  input[type="text"],
   input[type="email"],
-  button {
-    @apply col-span-6 md:col-span-4 rounded-md p-4 px-8 h-16;
+  input[type="submit"] {
+    @apply rounded-md p-4 px-4 h-16;
+  }
+
+  input[type="submit"] {
+    @apply sm:col-span-4;
   }
 </style>

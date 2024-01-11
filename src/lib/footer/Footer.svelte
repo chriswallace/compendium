@@ -8,10 +8,53 @@
       <a href="#">Get Started</a>
     </div>
     <div class="newsletter">
-      <form>
-        <label for="email-address">Subscribe to our mailing list.</label>
-        <input name="email-address" type="email" placeholder="Email Address" />
-        <button>Subscribe</button>
+      <form
+        method="post"
+        class="af-form-wrapper"
+        accept-charset="UTF-8"
+        action="https://www.aweber.com/scripts/addlead.pl"
+      >
+        <div class="hidden">
+          <input type="hidden" name="meta_web_form_id" value="151318046" />
+          <input type="hidden" name="meta_split_id" value="" />
+          <input type="hidden" name="listname" value="awlist6701372" />
+          <input
+            type="hidden"
+            name="redirect"
+            value="https://cpdm.app/success"
+            id="redirect_77675920773651233b7e23034e65e93f"
+          />
+          <input
+            type="hidden"
+            name="meta_redirect_onlist"
+            value="https://cpdm.app/already-subscribed"
+          />
+          <input
+            type="hidden"
+            name="meta_adtracking"
+            value="Website_Subscription_Box"
+          />
+          <input type="hidden" name="meta_message" value="1" />
+          <input type="hidden" name="meta_required" value="name,email" />
+
+          <input type="hidden" name="meta_tooltip" value="" />
+        </div>
+        <label for="name">Subscribe to our mailing list.</label>
+        <input
+          type="text"
+          id="awf_field-116728999"
+          name="name"
+          tabindex="500"
+          placeholder="Name"
+        />
+        <input
+          type="email"
+          name="email"
+          id="awf_field-116729000"
+          tabindex="501"
+          placeholder="Email Address"
+        />
+        <input type="submit" tabindex="502" value="Subscribe" />
       </form>
     </div>
     <div class="copyright">
@@ -42,22 +85,28 @@
     @apply lg:col-span-2 border border-[#ccc] rounded-md p-8;
   }
 
+  form {
+    @apply grid grid-cols-2 gap-2;
+  }
+
   label {
-    @apply block font-display text-2xl mb-4 text-secondary;
+    @apply col-span-2 font-display text-2xl mb-4 text-secondary;
     letter-spacing: -0.02em;
   }
 
+  input[type="text"],
   input[type="email"],
-  button {
+  input[type="submit"] {
     @apply h-12 px-6 py-4 rounded-md;
   }
 
+  input[type="text"],
   input[type="email"] {
-    @apply w-full mb-3 sm:mb-0 sm:w-[calc(60%-0.5rem)] inline-block;
+    @apply w-full;
   }
 
-  button {
-    @apply w-full sm:w-[calc(40%-0.5rem)] sm:ml-[0.5rem] inline-block;
+  input[type="submit"] {
+    @apply col-span-2;
   }
 
   .copyright {
