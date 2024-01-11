@@ -57,6 +57,16 @@
     @apply font-sans;
   }
 
+  ::selection {
+    color: var(--color-primary);
+    background: #EABCA1;
+  }
+
+  .feature ::selection{
+    color: #dbeae0;
+    background: var(--color-secondary);
+  }
+
   h1 {
     @apply max-w-3xl text-4xl md:text-7xl mb-12;
   }
