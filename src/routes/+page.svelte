@@ -24,4 +24,8 @@
     background-position: bottom right;
     background-repeat: no-repeat;
   }
+
+  h1 {
+    @apply text-[3.8rem];
+  }
 </style>

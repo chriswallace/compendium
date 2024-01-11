@@ -53,7 +53,7 @@
   }
 
   .close-menu {
-    @apply absolute bottom-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:hidden;
+    @apply absolute bottom-36 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:hidden;
   }
 
   a {
@@ -78,7 +78,7 @@
   }
 
   .open-menu {
-    @apply fixed top-8 right-[2rem] z-10 py-3 px-6 bg-[var(--background-with-opacity)] text-secondary border border-secondary rounded-sm md:hidden;
+    @apply fixed top-6 right-[2rem] z-10 py-3 px-6 bg-[var(--background-with-opacity)] text-secondary border border-secondary rounded-sm md:hidden;
   }
 
   .logo {
