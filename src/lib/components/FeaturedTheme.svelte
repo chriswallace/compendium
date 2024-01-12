@@ -27,7 +27,8 @@
       srcset="/images/medici-screen-small.png 320w,
               /images/medici-screen.png 1060w,
               /images/medici-screen@2x.png 1470w,
-              /images/medici-screen@3x.png 1780w"
+              /images/medici-screen@3x.png 1780w,
+              /images/medici-screen@4x.png 2048w"
       sizes="84vw"
       alt=""
     />
