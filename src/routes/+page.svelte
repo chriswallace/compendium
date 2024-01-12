@@ -14,7 +14,7 @@
 
 <MailingList />
 
-<FeaturedTheme themeName="Medici" img="/images/medici-screen.png" />
+<FeaturedTheme />
 
 <style type="scss">
   .hero {

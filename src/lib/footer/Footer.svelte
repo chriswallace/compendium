@@ -2,8 +2,8 @@
   <div class="container">
     <div class="logo">Compendium</div>
     <div class="links">
-      <a href="#">About</a>
-      <a href="#">Themes</a>
+      <a href="/medici">Medici</a>
+      <a href="#">Tools</a>
       <a href="#">Support</a>
       <a href="#">Get Started</a>
     </div>
@@ -36,7 +36,6 @@
           />
           <input type="hidden" name="meta_message" value="1" />
           <input type="hidden" name="meta_required" value="name,email" />
-
           <input type="hidden" name="meta_tooltip" value="" />
         </div>
         <label for="name">Subscribe to our mailing list.</label>
@@ -44,17 +43,15 @@
           type="text"
           id="awf_field-116728999"
           name="name"
-          tabindex="703"
           placeholder="Name"
         />
         <input
           type="email"
           name="email"
           id="awf_field-116729000"
-          tabindex="704"
           placeholder="Email Address"
         />
-        <input type="submit" tabindex="705" value="Subscribe" />
+        <input type="submit" value="Subscribe" />
       </form>
     </div>
     <div class="copyright">

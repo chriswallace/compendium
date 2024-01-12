@@ -1,6 +1,4 @@
 <script>
-  export let themeName;
-  export let img;
 </script>
 
 <div id="medici" class="feature">
@@ -24,7 +22,15 @@
   </div>
 
   <div class="promo">
-    <img src={img} alt="" />
+    <img
+      src="/images/medici-screen-small.png"
+      srcset="/images/medici-screen-small.png 320w,
+              /images/medici-screen.png 1060w,
+              /images/medici-screen@2x.png 1470w,
+              /images/medici-screen@3x.png 1780w"
+      sizes="84vw"
+      alt=""
+    />
     <div class="container">
       <h2>
         Your own blockchain-connected art gallery for showcasing favorite works,
@@ -56,7 +62,7 @@
   }
 
   h2 {
-    @apply lg:col-span-3 text-3xl font-light mb-8 font-sans;
+    @apply lg:col-span-3 text-xl sm:text-2xl font-normal mb-8 font-sans;
     letter-spacing: 0;
   }
 

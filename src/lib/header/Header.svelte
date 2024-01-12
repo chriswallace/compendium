@@ -14,8 +14,8 @@
       <a href="/" class="logo hide-on-desktop">Compendium</a>
 
       <ul class="menu">
-        <li><a href="/">About</a></li>
-        <li><a href="/">Themes</a></li>
+        <li><a href="/medici">Medici</a></li>
+        <li><a href="/">Tools</a></li>
         <li><a href="/">Support</a></li>
       </ul>
 
