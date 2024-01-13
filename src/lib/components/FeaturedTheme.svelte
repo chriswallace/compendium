@@ -38,8 +38,8 @@
         collections, and artists.
       </h2>
       <div class="actions">
-        <a class="cta" href="#">View Details</a>
-        <a href="#" class="button">Get Started</a>
+        <a class="cta" href="/medici">View Details</a>
+        <a href="/medici" class="button">Get Started</a>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
   }
 
   .title {
-    @apply max-w-[calc(100%-4rem)] w-[490px] font-light mx-auto mb-16;
+    @apply max-w-[calc(100%-2rem)] w-[490px] font-light mx-auto mb-16;
   }
 
   .promo {

@@ -50,7 +50,7 @@
 
 <div class="features">
   <div class="container">
-    <div class="overline">Features</div>
+    <div class="feature-overline">Features</div>
     <h2 class="feature-heading">
       Medici is perfect for artists, collectors, curators, and galleries.
     </h2>
@@ -154,7 +154,7 @@
   }
 
   .promo {
-    @apply max-w-[84%] mx-auto;
+    @apply max-w-7xl w-[calc(100%-2rem)] mx-auto;
   }
 
   .promo img {
@@ -179,15 +179,15 @@
   }
 
   .container {
-    @apply max-w-7xl mx-auto w-[calc(100%-4rem)];
+    @apply max-w-7xl mx-auto w-[calc(100%-2rem)];
   }
 
   .hero {
     @apply min-h-[100vh] bg-secondary bg-[#DAE6C7] pt-36 lg:pt-48 pb-24;
   }
 
-  .overline {
-    @apply mb-6 tracking-wide uppercase text-primary font-bold;
+  .feature-overline {
+    @apply mb-6 tracking-widest uppercase text-primary font-bold;
   }
 
   .feature-heading {
@@ -232,22 +232,26 @@
   }
 
   .buy-image img {
-    @apply shadow-lg rounded-sm;
+    @apply shadow-lg rounded-sm w-full;
   }
 
   .buy-now .container {
-    @apply grid grid-cols-1 md:grid-cols-3 gap-8 items-center;
+    @apply grid grid-cols-1 md:grid-cols-3 gap-y-8 md:gap-8 items-center justify-center;
   }
 
-  .buy-details .button {
-    @apply block my-8;
+  .buy-details {
+    @apply text-center;
   }
 
   .buy-details h3 {
-    @apply text-6xl;
+    @apply text-7xl;
   }
 
   .buy-details h3 span {
-    @apply text-primary text-2xl tracking-tighter;
+    @apply text-primary text-2xl tracking-tighter block;
+  }
+
+  .buy-details .button {
+    @apply text-lg font-bold block my-8;
   }
 </style>

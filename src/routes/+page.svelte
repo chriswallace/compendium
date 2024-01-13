@@ -9,7 +9,7 @@
 
 <div class="hero">
   <h1>Show off your digital art collection <i>in style</i>.</h1>
-  <a href="#" class="button">Get Started</a>
+  <a href="/medici" class="button">Get Started</a>
 </div>
 
 <MailingList />

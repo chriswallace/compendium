@@ -6,19 +6,21 @@
 
   let menuOpen = false;
 
+  let currentPage;
+
   function toggleMenu() {
     menuOpen = !menuOpen;
   }
 
   onMount(() => {
-    let currentPage = $page.url.pathname;
+    currentPage = $page.url.pathname;
     updateColors(currentPage);
     console.log(currentPage);
   });
 
   afterNavigate(() => {
     menuOpen = false;
-    let currentPage = $page.url.pathname;
+    currentPage = $page.url.pathname;
     updateColors(currentPage);
   });
 </script>
@@ -37,7 +39,7 @@
       </ul>
 
       <div class="cta-container">
-        <a href="#" class="cta">Get Started</a>
+        <a href="/medici" class="cta">Get Started</a>
       </div>
 
       <button
@@ -88,7 +90,7 @@
   }
 
   .menu {
-    @apply flex-grow md:flex max-w-[calc(100%-4rem)] mx-auto justify-center md:h-auto md:mt-0 mb-6 md:mb-0;
+    @apply flex-grow md:flex max-w-[calc(100%-2rem)] mx-auto justify-center md:h-auto md:mt-0 mb-6 md:mb-0;
 
     li {
       @apply md:mx-4 lg:mx-6 tracking-widest text-center;

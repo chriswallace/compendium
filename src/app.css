@@ -108,7 +108,7 @@
   }
 
   .content{
-    @apply max-w-[calc(100%-4rem)] mx-auto;
+    @apply max-w-[calc(100%-2rem)] mx-auto;
   }
 
   section {
