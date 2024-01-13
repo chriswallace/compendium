@@ -18,7 +18,7 @@
 
 <style type="scss">
   .hero {
-    @apply h-screen w-screen flex flex-col justify-center items-start px-8;
+    @apply h-screen w-screen flex flex-col justify-center items-start max-w-[calc(100%-2rem)] lg:max-w-[calc(100%-4rem)] mx-auto;
     background-image: url("/images/art-grid.png");
     background-size: contain;
     background-position: bottom right;

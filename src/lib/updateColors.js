@@ -1,6 +1,10 @@
 // Update colors based on the current page
 export function updateColors(page) {
     let colorPalette;
+
+    if (typeof document === 'undefined')
+        return;
+
     switch (page) {
         case "/medici":
             colorPalette = {

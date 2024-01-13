@@ -1,27 +1,24 @@
 <script>
   import { afterNavigate } from "$app/navigation";
-  import { onMount } from "svelte";
   import { page } from "$app/stores";
   import { updateColors } from "$lib/updateColors";
 
   let menuOpen = false;
 
-  let currentPage;
+  // Reactive statement to handle page changes
+  $: currentPage = $page.url.pathname;
+
+  $: if (currentPage) {
+    updateColors(currentPage);
+    console.log("Page updated to:", currentPage);
+  }
 
   function toggleMenu() {
     menuOpen = !menuOpen;
   }
 
-  onMount(() => {
-    currentPage = $page.url.pathname;
-    updateColors(currentPage);
-    console.log(currentPage);
-  });
-
   afterNavigate(() => {
     menuOpen = false;
-    currentPage = $page.url.pathname;
-    updateColors(currentPage);
   });
 </script>
 
@@ -90,7 +87,7 @@
   }
 
   .menu {
-    @apply flex-grow md:flex max-w-[calc(100%-2rem)] mx-auto justify-center md:h-auto md:mt-0 mb-6 md:mb-0;
+    @apply flex-grow md:flex max-w-[calc(100%-2rem)] lg:max-w-[calc(100%-4rem)] mx-auto justify-center md:h-auto md:mt-0 mb-6 md:mb-0;
 
     li {
       @apply md:mx-4 lg:mx-6 tracking-widest text-center;
@@ -98,7 +95,7 @@
   }
 
   .open-menu {
-    @apply fixed top-6 right-[2rem] z-10 py-3 px-6 bg-[var(--nav-background)] font-semibold text-secondary outline outline-secondary rounded-sm md:hidden hover:outline-primary hover:bg-primary hover:text-white;
+    @apply fixed top-6 right-[1.5rem] z-10 py-3 px-6 bg-[var(--nav-background)] font-semibold text-secondary outline outline-secondary rounded-sm md:hidden hover:outline-primary hover:bg-primary hover:text-white;
   }
 
   .logo {
