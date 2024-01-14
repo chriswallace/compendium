@@ -42,7 +42,7 @@
         collections, and artists.
       </h2>
       <div class="actions">
-        <a href="#" class="button">Get Started</a>
+        <a href="/medici" class="button">Get Started</a>
       </div>
     </div>
   </div>
@@ -201,10 +201,6 @@
 
   .feature-item h3 {
     @apply text-xl md:text-2xl;
-  }
-
-  .cta {
-    @apply lg:mr-8;
   }
 
   .features {
