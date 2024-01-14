@@ -10,7 +10,6 @@
 
   $: if (currentPage) {
     updateColors(currentPage);
-    console.log("Page updated to:", currentPage);
   }
 
   function toggleMenu() {
@@ -19,10 +18,11 @@
 
   afterNavigate(() => {
     menuOpen = false;
+    updateColors(currentPage);
   });
 </script>
 
-<header>
+<header class="navigation">
   <nav aria-label="Global" class="menu">
     <a href="/" class="logo">Compendium</a>
 
@@ -31,8 +31,8 @@
 
       <ul class="menu">
         <li><a href="/medici">Medici</a></li>
-        <li><a href="/">Tools</a></li>
-        <li><a href="/">Support</a></li>
+        <li><a href="/tools">Tools</a></li>
+        <li><a href="/support">Support</a></li>
       </ul>
 
       <div class="cta-container">
@@ -53,11 +53,11 @@
 
 <style lang="scss">
   header {
-    @apply pt-8 md:pt-6 md:pb-8 fixed left-0 top-0 right-0 bg-[var(--nav-background)];
+    @apply pt-8 md:pt-6 md:pb-8 fixed left-0 top-0 right-0;
   }
 
   .mobile-menu {
-    @apply md:flex w-full mx-auto fixed inset-0 bg-[var(--nav-background)] z-20 md:relative;
+    @apply md:flex w-full mx-auto fixed inset-0 z-20 md:relative;
   }
 
   .hide-on-mobile {
@@ -73,8 +73,8 @@
   }
 
   a {
-    @apply text-lg md:text-base text-center my-3 inline-block text-[var(--nav-text)] no-underline hover:underline underline-offset-8 decoration-2 decoration-[var(--nav-text)] hover:text-[var(--nav-hover-text)] hover:decoration-[var(--nav-hover-text)] font-medium uppercase;
-    letter-spacing: 3px;
+    @apply text-lg md:text-base text-center my-3 inline-block text-[var(--color-secondary)] no-underline hover:underline underline-offset-8 decoration-2 decoration-[var(--color-secondary)] hover:text-[var(--color-primary-hover)] hover:decoration-[var(--color-primary-hover)] font-semibold uppercase;
+    letter-spacing: 1px;
   }
 
   .cta-container {
@@ -83,7 +83,7 @@
 
   a.cta {
     @apply underline mx-auto;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
   }
 
   .menu {
@@ -103,6 +103,20 @@
 
     .mobile-menu & {
       @apply block md:hidden text-[36px] my-16;
+    }
+  }
+
+  :global {
+    .navigation,
+    body.default,
+    .mobile-menu {
+      @apply bg-[var(--background-without-opacity)];
+    }
+
+    .medici .navigation,
+    body.medici,
+    .medici .mobile-menu {
+      @apply bg-[var(--color-tertiary)];
     }
   }
 </style>

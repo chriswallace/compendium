@@ -3,9 +3,9 @@
     <div class="logo">Compendium</div>
     <div class="links">
       <a href="/medici">Medici</a>
-      <a href="#">Tools</a>
-      <a href="#">Support</a>
-      <a href="#">Get Started</a>
+      <a href="/tools">Tools</a>
+      <a href="/support">Support</a>
+      <a href="/medici">Get Started</a>
     </div>
     <div class="newsletter">
       <form

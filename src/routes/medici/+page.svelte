@@ -2,7 +2,7 @@
 </script>
 
 <svelte:head>
-  <title>Medici by Compendium: a standalone web app for your art gallery</title>
+  <title>Medici // Compendium</title>
 </svelte:head>
 
 <div id="medici" class="hero">
@@ -220,7 +220,7 @@
   }
 
   .buy-now {
-    @apply py-24 bg-[var(--background-with-opacity)];
+    @apply py-24 bg-[var(--background-without-opacity)];
   }
 
   .buy-now h2 {

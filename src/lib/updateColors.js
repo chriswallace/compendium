@@ -1,37 +1,20 @@
-// Update colors based on the current page
 export function updateColors(page) {
-    let colorPalette;
-
     if (typeof document === 'undefined')
         return;
 
-    switch (page) {
-        case "/medici":
-            colorPalette = {
-                primary: "var(--color-secondary)",
-                secondary: "var(--color-primary)",
-                background: "var(--color-tertiary)",
-            };
-            break;
-        // Define other pages and their color palettes here
-        default:
-            colorPalette = {
-                primary: "var(--color-secondary)",
-                secondary: "var(--color-primary)",
-                background: "var(--background-without-opacity)",
-            };
-    }
-    // Set CSS variables
-    document.documentElement.style.setProperty(
-        "--nav-text",
-        colorPalette.primary,
-    );
-    document.documentElement.style.setProperty(
-        "--nav-hover-text",
-        colorPalette.secondary,
-    );
-    document.documentElement.style.setProperty(
-        "--nav-background",
-        colorPalette.background,
-    );
+    // Define a mapping of page routes to class names
+    const pageClassMap = {
+        "/medici/": "medici",
+        // Add other page routes and their corresponding class names
+        // Example: "/anotherPage": "anotherPage-theme"
+    };
+
+    // Default class if the page is not in the map
+    const defaultClass = "default";
+
+    // Determine the class to set based on the current page
+    const classToSet = pageClassMap[page] || defaultClass;
+
+    // Set the class on the body element
+    document.body.className = classToSet;
 }
