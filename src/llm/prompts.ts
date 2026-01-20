@@ -39,7 +39,8 @@ export interface ToolSchema {
   };
 }
 
-export const TOOL_SCHEMAS: ToolSchema[] = [
+// Base tool schemas without machine parameter
+const BASE_TOOL_SCHEMAS: ToolSchema[] = [
   {
     type: 'function',
     function: {
@@ -183,3 +184,48 @@ export const TOOL_SCHEMAS: ToolSchema[] = [
     },
   },
 ];
+
+// Add machine parameter to each tool schema for remote execution
+function addMachineParameter(schemas: ToolSchema[]): ToolSchema[] {
+  return schemas.map((schema) => ({
+    ...schema,
+    function: {
+      ...schema.function,
+      parameters: {
+        ...schema.function.parameters,
+        properties: {
+          ...schema.function.parameters.properties,
+          machine: {
+            type: 'string',
+            description: 'Target machine to execute on. Use "local" or omit for local execution, or specify a connected machine name.',
+          },
+        },
+      },
+    },
+  }));
+}
+
+export const TOOL_SCHEMAS = BASE_TOOL_SCHEMAS;
+
+// Get tool schemas with machine parameter for server mode
+export function getRemoteToolSchemas(): ToolSchema[] {
+  return addMachineParameter(BASE_TOOL_SCHEMAS);
+}
+
+// Generate system prompt with connected machines info
+export function getSystemPromptWithMachines(machines: { name: string; capabilities: string[] }[]): string {
+  if (machines.length <= 1) {
+    return SYSTEM_PROMPT;
+  }
+
+  const machineList = machines
+    .map((m) => `  - ${m.name}: ${m.capabilities.join(', ')}`)
+    .join('\n');
+
+  return `${SYSTEM_PROMPT}
+
+Connected machines:
+${machineList}
+
+You can execute tools on remote machines by adding a "machine" parameter to tool calls. If not specified, tools execute locally on the server.`;
+}

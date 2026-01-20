@@ -33,13 +33,22 @@ export interface StreamChunk {
   done: boolean;
 }
 
+export interface ClientOptions {
+  systemPrompt?: string;
+  toolSchemas?: ToolSchema[];
+}
+
 export class OllamaClient {
   private baseUrl: string;
   private model: string;
+  private systemPrompt: string;
+  private toolSchemas: ToolSchema[];
 
-  constructor(baseUrl: string, model: string) {
+  constructor(baseUrl: string, model: string, options?: ClientOptions) {
     this.baseUrl = baseUrl.replace(/\/$/, '');
     this.model = model;
+    this.systemPrompt = options?.systemPrompt || SYSTEM_PROMPT;
+    this.toolSchemas = options?.toolSchemas || TOOL_SCHEMAS;
   }
 
   setModel(model: string): void {
@@ -48,6 +57,14 @@ export class OllamaClient {
 
   getModel(): string {
     return this.model;
+  }
+
+  setSystemPrompt(prompt: string): void {
+    this.systemPrompt = prompt;
+  }
+
+  setToolSchemas(schemas: ToolSchema[]): void {
+    this.toolSchemas = schemas;
   }
 
   async checkConnection(): Promise<boolean> {
@@ -77,7 +94,7 @@ export class OllamaClient {
     onToolCall?: (toolCall: ToolCall) => Promise<string>
   ): AsyncGenerator<string, void, unknown> {
     const fullMessages: Message[] = [
-      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'system', content: this.systemPrompt },
       ...messages,
     ];
 
@@ -90,7 +107,7 @@ export class OllamaClient {
         body: JSON.stringify({
           model: this.model,
           messages: fullMessages,
-          tools: TOOL_SCHEMAS,
+          tools: this.toolSchemas,
           stream: true,
         }),
       });
@@ -169,7 +186,7 @@ export class OllamaClient {
 
   async chat(messages: Message[]): Promise<ChatResponse> {
     const fullMessages: Message[] = [
-      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'system', content: this.systemPrompt },
       ...messages,
     ];
 
@@ -181,7 +198,7 @@ export class OllamaClient {
       body: JSON.stringify({
         model: this.model,
         messages: fullMessages,
-        tools: TOOL_SCHEMAS,
+        tools: this.toolSchemas,
         stream: false,
       }),
     });

@@ -1,14 +1,9 @@
 import * as readline from 'readline';
 import chalk from 'chalk';
 import ora from 'ora';
-import { OllamaClient, Message, ToolCall } from './llm/client.js';
-import { executeTool } from './tools/index.js';
-import { loadConfig, updateConfig, Config } from './utils/config.js';
-import {
-  loadConversation,
-  saveConversation,
-  clearConversation,
-} from './history/store.js';
+import { OllamaClient } from './llm/client.js';
+import { Config, updateConfig } from './utils/config.js';
+import { AgentCore } from './core/agent.js';
 import {
   formatError,
   formatSuccess,
@@ -17,33 +12,35 @@ import {
   formatToolResult,
   formatModelInfo,
   formatHeader,
-  formatDivider,
 } from './utils/display.js';
 
 export class CLI {
-  private client: OllamaClient;
+  private agent: AgentCore;
   private config: Config;
-  private messages: Message[] = [];
   private rl: readline.Interface | null = null;
 
   constructor(client: OllamaClient, config: Config) {
-    this.client = client;
     this.config = config;
+    this.agent = new AgentCore(client, config, {
+      onToolCall: (event) => {
+        console.log(formatToolCall(event.toolName, event.params));
+      },
+      onToolResult: (event) => {
+        console.log(formatToolResult(event.result));
+      },
+    });
   }
 
   async initialize(): Promise<void> {
-    // Load conversation history
-    if (this.config.historyEnabled) {
-      this.messages = await loadConversation();
-      if (this.messages.length > 0) {
-        console.log(formatInfo(`Loaded ${this.messages.length} messages from history`));
-      }
+    const messageCount = await this.agent.initialize();
+    if (messageCount > 0) {
+      console.log(formatInfo(`Loaded ${messageCount} messages from history`));
     }
   }
 
   private printWelcome(): void {
     console.log(formatHeader('Compendium - Local AI Coding Assistant'));
-    console.log(formatModelInfo(this.client.getModel(), this.config.ollamaUrl));
+    console.log(formatModelInfo(this.agent.getModel(), this.config.ollamaUrl));
     console.log(chalk.gray('Type /help for commands, /exit to quit\n'));
   }
 
@@ -58,10 +55,10 @@ ${chalk.cyan('Commands:')}
   ${chalk.yellow('/exit')}           Exit the assistant
 
 ${chalk.cyan('Tips:')}
-  • Ask questions about your code
-  • Request file edits or creation
-  • Run shell commands through the assistant
-  • The assistant remembers context within a session
+  - Ask questions about your code
+  - Request file edits or creation
+  - Run shell commands through the assistant
+  - The assistant remembers context within a session
 `);
   }
 
@@ -79,17 +76,16 @@ ${chalk.cyan('Tips:')}
         process.exit(0);
 
       case 'clear':
-        this.messages = [];
-        await clearConversation();
+        await this.agent.clearHistory();
         console.log(formatSuccess('Conversation cleared'));
         return true;
 
       case 'model':
         if (args.length === 0) {
-          console.log(formatInfo(`Current model: ${this.client.getModel()}`));
+          console.log(formatInfo(`Current model: ${this.agent.getModel()}`));
         } else {
           const newModel = args.join(' ');
-          this.client.setModel(newModel);
+          this.agent.setModel(newModel);
           await updateConfig({ model: newModel });
           console.log(formatSuccess(`Switched to model: ${newModel}`));
         }
@@ -98,12 +94,12 @@ ${chalk.cyan('Tips:')}
       case 'models':
         try {
           const spinner = ora('Fetching models...').start();
-          const models = await this.client.listModels();
+          const models = await this.agent.listModels();
           spinner.stop();
           console.log(chalk.cyan('Available models:'));
           models.forEach((m) => {
-            const current = m === this.client.getModel() ? chalk.green(' (current)') : '';
-            console.log(`  • ${m}${current}`);
+            const current = m === this.agent.getModel() ? chalk.green(' (current)') : '';
+            console.log(`  - ${m}${current}`);
           });
         } catch (error) {
           console.log(formatError(`Failed to list models: ${error}`));
@@ -111,11 +107,12 @@ ${chalk.cyan('Tips:')}
         return true;
 
       case 'history':
-        if (this.messages.length === 0) {
+        const messages = this.agent.getMessages();
+        if (messages.length === 0) {
           console.log(formatInfo('No conversation history'));
         } else {
           console.log(chalk.cyan('Conversation history:'));
-          this.messages.forEach((msg, i) => {
+          messages.forEach((msg, i) => {
             const role = msg.role === 'user' ? chalk.green('You') : chalk.blue('Assistant');
             const content = msg.content.length > 100
               ? msg.content.substring(0, 100) + '...'
@@ -131,55 +128,27 @@ ${chalk.cyan('Tips:')}
     }
   }
 
-  private async handleToolCall(toolCall: ToolCall): Promise<string> {
-    let params: unknown;
-    try {
-      params = JSON.parse(toolCall.function.arguments);
-    } catch {
-      params = {};
-    }
-
-    console.log(formatToolCall(toolCall.function.name, params));
-
-    const result = await executeTool(toolCall.function.name, params);
-
-    console.log(formatToolResult(result));
-
-    return result;
-  }
-
   private async processUserInput(input: string): Promise<void> {
-    // Add user message
-    this.messages.push({ role: 'user', content: input });
-
     const spinner = ora('Thinking...').start();
 
     try {
-      let fullResponse = '';
-
-      // Stream the response
       spinner.stop();
       process.stdout.write(chalk.blue('Assistant: '));
 
-      for await (const chunk of this.client.chatStream(
-        this.messages,
-        this.handleToolCall.bind(this)
-      )) {
-        process.stdout.write(chunk);
-        fullResponse += chunk;
-      }
+      await this.agent.streamMessage(input, (event) => {
+        if (event.type === 'chunk') {
+          process.stdout.write(event.data as string);
+        } else if (event.type === 'tool_call') {
+          const data = event.data as { toolName: string; params: unknown };
+          console.log('\n' + formatToolCall(data.toolName, data.params));
+        } else if (event.type === 'tool_result') {
+          const data = event.data as { result: string };
+          console.log(formatToolResult(data.result));
+          process.stdout.write(chalk.blue('Assistant: '));
+        }
+      });
 
       console.log('\n');
-
-      // Add assistant response to history
-      if (fullResponse) {
-        this.messages.push({ role: 'assistant', content: fullResponse });
-      }
-
-      // Save conversation
-      if (this.config.historyEnabled) {
-        await saveConversation(this.messages);
-      }
     } catch (error) {
       spinner.stop();
       console.log(formatError(`Error: ${error}`));
@@ -214,7 +183,6 @@ ${chalk.cyan('Tips:')}
       });
     };
 
-    // Handle Ctrl+C gracefully
     this.rl.on('close', () => {
       console.log(chalk.gray('\nGoodbye!'));
       process.exit(0);
